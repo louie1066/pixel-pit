@@ -49,6 +49,10 @@
   .chip.surprise.used { border-color: var(--pink); }
   [data-theme="light"] .chip.surprise { color: #07657d; font-weight: 700; }
   [data-theme="light"] .chip.surprise.used { border-color: #0a7d99; }
+  /* Mouse hover on desktop: cyan in dark mode, teal in light mode (--cyan changes with the theme) */
+  @media (hover: hover) and (pointer: fine) {
+    .chip:not(:disabled):not(.on):hover { border-color: var(--cyan); color: var(--cyan); }
+  }
   .card.pick { border-color: var(--pink); box-shadow: 0 0 0 3px var(--pink); }
   [data-theme="light"] .card.pick { border-color: #0a7d99; box-shadow: 0 0 0 3px #0a7d99; }
   .empty { padding: 30px 0; color: var(--dim); }
