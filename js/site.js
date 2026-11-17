@@ -264,7 +264,7 @@ toggle.onclick = () => {
 };
 
 // ---------- Contact form: opens the visitor's own email app with the message ready (no server needed) ----------
-const CONTACT_EMAIL = 'hello@pixelpit.example';   // replace when the real address is chosen
+const CONTACT_EMAIL = 'louie1066@gmail.com';   // temporary address; replace when the real one is chosen
 const cf = id => document.getElementById(id);
 function cfSet(id, errId, text) {
   cf(errId).textContent = text;
