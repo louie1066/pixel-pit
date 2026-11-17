@@ -9,7 +9,7 @@
     --pink: #ff4fa3;
     --edge: #242943;
     --surround: #07080f;
-    --header-top: #161a2e;
+    --header-top: #262e55;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   /* Always reserve the scrollbar space so every page is exactly the same width, whether or not it is long enough to scroll */
@@ -80,7 +80,7 @@
 
   /* Light theme: same layout, colours swapped */
   [data-theme="light"] {
-    --bg: #f4f1ea; --panel: #ffffff; --line: #d8d2c4; --edge: #e4dfd2; --surround: #d9d3c3; --header-top: #ebe5d6;
+    --bg: #f4f1ea; --panel: #ffffff; --line: #d8d2c4; --edge: #e4dfd2; --surround: #d9d3c3; --header-top: #e2d9c2;
     --text: #1d2033; --dim: #5a6080; --yellow: #8a6500; --cyan: #0a7d99; --pink: #c2185b;
   }
 
