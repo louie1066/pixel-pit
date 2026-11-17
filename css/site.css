@@ -127,7 +127,7 @@
   .page .cf-meta .cf-status { margin-top: 0; }
   .page .cf-meta #cfCount { margin-left: auto; }
   .page .cf-meta .err:empty, .page .cf-meta .cf-status:empty { display: none; }
-  .page .cf-note { font-size: .8rem; color: var(--dim); }
+  .page .cf-note { font-size: .8rem; color: var(--dim); margin-top: 14px; }
 
   /* Confirmation pop-up (contact form) */
   .toast { position: fixed; top: 42%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; width: min(92vw, 600px); display: flex; align-items: flex-start; gap: 16px; padding: 24px 28px; background: #1b1f33; color: #f2f4f6; border: 3px solid #ffd23f; border-radius: 12px; box-shadow: 0 10px 32px rgba(0,0,0,.45); font-size: 1.35rem; line-height: 1.5; animation: toast-in .2s ease; }
