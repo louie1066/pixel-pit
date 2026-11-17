@@ -273,6 +273,27 @@ function cfSet(id, errId, text) {
   cf(id).setAttribute('aria-invalid', text ? 'true' : 'false');
   return !text;
 }
+// Small pop-up that closes on its own after a few seconds, or with its × button (top right)
+function showToast(text) {
+  const old = document.getElementById('toast');
+  if (old) old.remove();
+  const t = document.createElement('div');
+  t.id = 'toast';
+  t.className = 'toast';
+  t.setAttribute('role', 'status');
+  const msg = document.createElement('span');
+  msg.textContent = text;
+  const x = document.createElement('button');
+  x.type = 'button';
+  x.className = 'toast-x';
+  x.setAttribute('aria-label', 'Close message');
+  x.textContent = '×';
+  t.append(msg, x);
+  document.body.appendChild(t);
+  const close = () => t.remove();
+  x.addEventListener('click', close);
+  setTimeout(close, 4000);
+}
 function sendContact() {
   const name = cf('cfName').value.replace(/\s+/g, ' ').trim();
   const email = cf('cfEmail').value.trim();
@@ -309,6 +330,7 @@ function sendContact() {
     .then(d => {
       if (!d.success) throw new Error(d.message || 'failed');
       status.textContent = 'Thanks! Your message has been sent.';
+      showToast('Thanks! Your message has been sent.');
       cf('cfName').value = ''; cf('cfEmail').value = ''; cf('cfMsg').value = '';
       cf('cfCount').textContent = '0 / 1000';
     })
