@@ -292,7 +292,7 @@ function showToast(text) {
   document.body.appendChild(t);
   const close = () => t.remove();
   x.addEventListener('click', close);
-  setTimeout(close, 4000);
+  setTimeout(close, 6000);
 }
 function sendContact() {
   const name = cf('cfName').value.replace(/\s+/g, ' ').trim();
