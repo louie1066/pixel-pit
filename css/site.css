@@ -124,6 +124,7 @@
   [data-theme="light"] .btn { color: #fff; }
   .btn:hover { filter: brightness(1.1); }
   .page .cf-status { margin-top: 12px; font-size: .9rem; }
+  .page .cf-meta .cf-status { margin-top: 0; }
   .page .cf-note { font-size: .8rem; color: var(--dim); }
 
   /* Confirmation pop-up (contact form) */
