@@ -263,7 +263,8 @@ toggle.onclick = () => {
   applyTheme(next);
 };
 
-// ---------- Contact form: opens the visitor's own email app with the message ready (no server needed) ----------
+// ---------- Contact form: sends the message through Web3Forms, which emails it to the inbox linked to the key ----------
+const WEB3FORMS_KEY = '96b7c327-46cb-4714-813d-b45d286eaba6';   // public form key; the inbox is set on web3forms.com
 const CONTACT_EMAIL = 'louie1066@gmail.com';   // temporary address; replace when the real one is chosen
 const cf = id => document.getElementById(id);
 function cfSet(id, errId, text) {
@@ -286,14 +287,35 @@ function sendContact() {
     cf(!okName ? 'cfName' : !okEmail ? 'cfEmail' : 'cfMsg').focus();
     return;
   }
-  const done = 'Your email app should now open with your message ready. Press Send there to finish. If nothing opens, email us at ' + CONTACT_EMAIL + '.';
-  if (cf('cfHp').value) { status.textContent = done; return; }   // hidden spam-trap field was filled: do nothing
-  const subject = '[Pixel Pit] ' + topic + ' from ' + name;
-  const body = msg + '\n\n--\nName: ' + name + '\nReply to: ' + email;
-  const a = document.createElement('a');
-  a.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  document.body.appendChild(a); a.click(); a.remove();
-  status.textContent = done;
+  if (cf('cfHp').value) { status.textContent = 'Thanks! Your message has been sent.'; return; }   // hidden spam-trap field was filled: do nothing
+  const btn = cf('cfSend');
+  btn.disabled = true;
+  status.textContent = 'Sending...';
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      subject: '[Pixel Pit] ' + topic + ' from ' + name,
+      from_name: 'Pixel Pit contact form',
+      name: name,
+      email: email,
+      replyto: email,
+      topic: topic,
+      message: msg
+    })
+  })
+    .then(r => r.json())
+    .then(d => {
+      if (!d.success) throw new Error(d.message || 'failed');
+      status.textContent = 'Thanks! Your message has been sent.';
+      cf('cfName').value = ''; cf('cfEmail').value = ''; cf('cfMsg').value = '';
+      cf('cfCount').textContent = '0 / 1000';
+    })
+    .catch(() => {
+      status.textContent = 'Sorry, the message did not send. Please try again, or email ' + CONTACT_EMAIL + '.';
+    })
+    .finally(() => { btn.disabled = false; });
 }
 if (cf('cfSend')) {
   cf('cfMsg').addEventListener('input', () => { cf('cfCount').textContent = cf('cfMsg').value.length + ' / 1000'; });
