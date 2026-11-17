@@ -249,7 +249,11 @@ function applyTheme(t) {
   root.dataset.theme = t;
   // Pass the choice to each game link, so the game opens in the same mode
   document.querySelectorAll('.card-link, .lb-link').forEach(a => a.href = a.dataset.base + '#' + t);
-  toggle.textContent = t === 'light' ? '🌙' : '☀️';
+  // Sun shows in dark mode (click for light), moon shows in light mode (click for dark)
+  const ICON_ATTR = 'width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  toggle.innerHTML = t === 'light'
+    ? `<svg ${ICON_ATTR}><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>`
+    : `<svg ${ICON_ATTR}><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>`;
   toggle.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
 }
 // Always open in dark mode; the toggle still switches light and dark during the visit
